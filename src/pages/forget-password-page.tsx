@@ -1,7 +1,37 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRequestPasswordResetEmail } from "@/hooks/mutations/use-request-password-reset-email";
+import { generateErrorMessage } from "@/lib/error";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ForgetPasswordPage() {
+  const [email, setEmail] = useState("");
+
+  const {
+    mutate: requestPasswordResetEmail,
+    isPending: isRequestPasswordResetEmailPending,
+  } = useRequestPasswordResetEmail({
+    onSuccess: () => {
+      toast.info("인증 메일이 발송되었습니다.", {
+        position: "top-center",
+      });
+      setEmail("");
+    },
+    onError: (error) => {
+      const message = generateErrorMessage(error);
+      toast.error(message, {
+        position: "top-center",
+      });
+      setEmail("");
+    },
+  });
+
+  const handleSendEmailClick = () => {
+    if (email.trim() === "") return;
+    requestPasswordResetEmail(email);
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1">
@@ -11,8 +41,20 @@ export default function ForgetPasswordPage() {
         </div>
       </div>
 
-      <Input className="py-6" placeholder="example@abc.com" />
-      <Button className="w-full">인증 코드 발송</Button>
+      <Input
+        disabled={isRequestPasswordResetEmailPending}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="py-6"
+        placeholder="example@abc.com"
+      />
+      <Button
+        disabled={isRequestPasswordResetEmailPending}
+        onClick={handleSendEmailClick}
+        className="w-full"
+      >
+        인증 코드 발송
+      </Button>
     </div>
   );
 }

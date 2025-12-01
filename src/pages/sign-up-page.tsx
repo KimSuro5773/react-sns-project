@@ -11,7 +11,8 @@ export default function SignUpPage() {
   const { mutate: signUp } = useSignUp();
 
   const handleSignUpClick = () => {
-    if (email.trim() === "" && password.trim() === "") return;
+    if (email.trim() === "") return;
+    if (password.trim() === "") return;
     signUp({ email, password });
   };
 

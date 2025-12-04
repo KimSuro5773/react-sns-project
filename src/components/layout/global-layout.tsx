@@ -9,11 +9,7 @@ export default function GlobalLayout() {
       <header className="h-15 border-b">
         <div className="m-auto flex h-full w-full max-w-175 justify-between px-4">
           <Link to={"/"} className="flex items-center gap-2">
-            <img
-              className="h-5"
-              src={logo}
-              alt="리액트 SNS 로고, 메시지 말풍선을 형상화한 모양이다"
-            />
+            <img className="h-5" src={logo} alt="리액트 SNS 로고" />
             <div className="font-bold">React SNS</div>
           </Link>
 

@@ -12,5 +12,10 @@ export function formatTimeAgo(time: Date | string | number) {
   if (hourDiff < 24) return `${hourDiff}시간 전`;
 
   const dayDiff = Math.floor(hourDiff / 24);
-  return `${dayDiff}일 전`;
+  if (dayDiff < 30) {
+    return `${dayDiff}일 전`;
+  }
+
+  const monthDiff = Math.floor(dayDiff / 30);
+  return `${monthDiff}달 전`;
 }

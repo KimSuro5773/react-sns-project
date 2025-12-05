@@ -25,5 +25,7 @@ export function useInfinitePostsData() {
       if (lastPage.length < PAGE_SIZE) return undefined;
       return allPage.length;
     },
+
+    staleTime: Infinity,
   });
 }

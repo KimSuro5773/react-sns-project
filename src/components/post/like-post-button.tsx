@@ -6,9 +6,11 @@ import { toast } from "sonner";
 export default function LikePostButton({
   id,
   likeCount,
+  isLiked,
 }: {
   id: number;
   likeCount: number;
+  isLiked: boolean;
 }) {
   const sesstion = useSession();
   const { mutate: togglePostLike } = useTogglePostLike({
@@ -28,7 +30,7 @@ export default function LikePostButton({
       onClick={handleLikeClick}
       className="hover:bg-muted flex cursor-pointer items-center gap-2 rounded-xl border p-2 px-4 text-sm"
     >
-      <HeartIcon className="h-4 w-4" />
+      <HeartIcon className={`h-4 w-4 ${isLiked && "fill-red-500"}`} />
       <span>{likeCount}</span>
     </div>
   );

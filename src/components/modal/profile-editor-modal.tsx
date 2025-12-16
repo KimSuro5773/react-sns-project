@@ -10,6 +10,7 @@ import { useProfileEditorModal } from "@/store/profile-editor-modal";
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useUpdateProfile } from "@/hooks/mutations/profile/use-update-profile";
 import { toast } from "sonner";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 type Image = { file: File; previewUrl: string };
 
@@ -84,6 +85,9 @@ export default function ProfileEditorModal() {
     <Dialog open={isOpen} onOpenChange={close}>
       <DialogContent className="flex flex-col gap-5">
         <DialogTitle>프로필 수정하기</DialogTitle>
+        <DialogDescription className="sr-only">
+          프로필 이미지, 닉네임, 소개 글을 수정할 수 있습니다.
+        </DialogDescription>
         {fetchProfileError && <FallBack />}
         {isFetchProfilePending && <Loader />}
         {!fetchProfileError && !isFetchProfilePending && (

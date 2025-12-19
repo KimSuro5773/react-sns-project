@@ -50,7 +50,7 @@ export default function CommentItem(props: NestedComment) {
       className={`flex flex-col gap-8 pb-5 ${isRootComment ? "border-b" : "ml-6"}`}
     >
       <div className="flex items-start gap-4">
-        <Link to={"#"}>
+        <Link to={`/profile/${props.author_id}`}>
           <div className="flex h-full flex-col">
             <img
               className="h-10 w-10 rounded-full object-cover"

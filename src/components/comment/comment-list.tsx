@@ -25,7 +25,7 @@ function toNestedComments(comments: Comment[]): NestedComment[] {
       result[rootCommentIndex].children.push({
         ...comment,
         children: [],
-        parentComment: result[rootCommentIndex],
+        parentComment,
       });
     }
   });
